@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="js/jsCommon.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Handlekurv</title>
+</head>
+
+<body>
+    <div id="containerHandlevogn">
+        <header>
+            <button class="menu-btn" id="tilbakeBtn" onclick="history.go(-1);">Tilbake til webshop</button>
+        </header>
+        <section>
+            <p class="handlevogn-liste" id="handlekurv">Din handlekurv:</p>
+            <p class="handlevogn-liste" id="totalt"></p>
+        </section>
+    </div>
+    <script>
+        var handlekurv;
+        var pris = [299, 499, 49, 399];
+        var totalt;
+        var init = (function () { //start init 
+            var initiateHTMLObjects = function () {
+                handlekurv = document.getElementById("handlekurv");
+                totalt = document.getElementById("totalt");
+            }();
+            var lesCookie = function () {
+                var innhold = document.cookie.split("=")[1];
+                var split = innhold.split(",");
+                if (innhold != '') {
+                    for (var i = 0; i < 4; i++) {
+                        newProductArray[i] = parseInt(split[i]);
+                    }
+                }
+                lagListe();
+            }();
+
+            function lagListe() { //Henter ut string fra cookie og putter alle tallene inn i array og legger de inn i HTML som produkter.
+                for (var i = 0; i < 4; i++) {
+                    var numberOfProducts = newProductArray[i];
+                    if (numberOfProducts > 0) {
+                        handlekurv.innerHTML += "<div class='handlevogn-elementer'><img class='img-handlekurv' src=\"" + bilde[i] + "\"/><p class'p-handlekurv'>" + tittel[i] + " (" + numberOfProducts + ") - totalpris: " + numberOfProducts * pris[i] + ",-</p></div>";
+                    }
+                }
+                summerTotal();
+            }
+
+            function summerTotal() { //Summerer antall fra index i arrayey
+                for (var i = 0; i < 4; i++) {
+                    var numberOfProducts = newProductArray[i];
+                    if (numberOfProducts > 0) {
+                        totalsum += numberOfProducts * pris[i];
+                    }
+                }
+                totalt.innerHTML = "Din totalsum er " + totalsum + " kr";
+            }
+        }()); // end init
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link type="text/css" href="css/css.css" rel="stylesheet">
+    <title>Oppgave 1</title>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h1>Brainstorm app</h1> </header>
+        <div class="input-wrap">
+            <label>Legg til tittel</label>
+            <input type="text" id="tittel" onfocus="this.value=''">
+            <button onclick="lagTittel()">Legg til</button>
+        </div>
+        <br>
+        <div class="input-wrap">
+            <label>Legg til ny idé</label>
+            <input type="text" id="leggTilIde" onfocus="this.value=''">
+            <button onclick="lagIde()">Legg til</button>
+        </div>
+        <div id="tittelWrap">
+            <h3 id="h3Tittel">Ny liste</h3> </div>
+        <h4>Ideer</h4>
+        <div id="ideer"></div>
+        <h4>Forkastet</h4>
+        <div id="forkastet"></div>
+    </div>
+    <script>
+        function lagTittel() { //Endrer tittel på listen 
+            var tittel = document.getElementById("tittel").value;
+            if (tittel === "") {
+                window.alert("Du må skrive noe");
+                return false;
+            }
+            else {
+                document.getElementById("h3Tittel").innerHTML = tittel;
+            }
+        }
+
+        function lagIde() { //Lager en idé og legger den under "ideer". Sjekker at bruker skriver inn verdi i input.
+            var leggTil = document.getElementById("leggTilIde").value;
+            if (leggTil === "") {
+                window.alert("Du må skrive noe");
+                return false;
+            }
+            var nyIde = document.createElement("p");
+            nyIde.className = "ny-p";
+            nyIde.innerHTML = document.getElementById("leggTilIde").value;
+            document.getElementById("ideer").appendChild(nyIde);
+            nyIde.onclick = flytt;
+        }
+
+        function flytt() { //Sjekker påklikket elements parent og flytter elementet til motsatt parent. 
+            if (this.parentNode.id == "ideer") {
+                document.getElementById("forkastet").appendChild(this);
+            }
+            else {
+                document.getElementById("ideer").appendChild(this);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>The labours of Hercules´ knight</title>
+</head>
+
+<body>
+    <div id="historie">
+        <button id="start" onclick="startGame()">Start spillet</button>
+    </div>
+    <div id="container">
+        <h5 id="tittel">The labours of Hercules´ knight</h5> <img id="hut" src="bilder/hut.png" alt="hut"> <img id="cave" src="bilder/cave.png" alt="cave"> <img id="ship" src="bilder/ship.png" alt="ship"> <img id="mountains" src="bilder/mountains.png" alt="mountains"> <img id="mainCharacter" src="bilder/knight.png" alt="Main character"> </div>
+    <div id="meny">
+        <h4 id="mat">Kjøttbiter: 0/100</h4>
+        <button id="restart" onclick="location.reload()">Start på nytt</button>
+    </div>
+    <script>
+        var kjott;
+        var mainCharacter;
+        var container;
+        var characterLeft;
+        var characterTop;
+        var button;
+        var hut;
+        var cave;
+        var mountains;
+        var ship;
+        var historie;
+        var start;
+        var init = function () {
+            var getHTMLElements = function () {
+                mainCharacter = document.getElementById("mainCharacter");
+                container = document.getElementById("container");
+                button = document.getElementById("restart");
+                hut = document.getElementById("hut");
+                cave = document.getElementById("cave");
+                mountains = document.getElementById("mountains");
+                ship = document.getElementById("ship");
+                kjott = 0;
+                historie = document.getElementById("historie");
+                start = document.getElementById("start");
+            }();
+            var create = function () {
+                createStuff();
+            }();
+        }();
+
+        function createStuff() { //Generate the main map and GUI using the functions below
+            //Tittel
+            document.getElementById("tittel").style.fontFamily = "Arial, Helvetica, sans-serif";
+            document.getElementById("tittel").style.textAlign = "center";
+            document.getElementById("tittel").style.backgroundColor = "#801515";
+            document.getElementById("tittel").style.padding = "30px";
+            document.getElementById("tittel").style.fontSize = "30px";
+            document.getElementById("tittel").style.color = "#FFF";
+            //Start button
+            start.style.fontFamily = "Arial, Helvetica, sans-serif";
+            start.style.fontWeight = "bolder";
+            start.style.padding = "10px";
+            start.style.color = "#FFF";
+            start.style.backgroundColor = "#801515";
+            //Mat
+            document.getElementById("mat").style.marginTop = "10px";
+            setDisplay("mat", "inline");
+            document.getElementById("mat").style.fontFamily = "Arial, Helvetica, sans-serif";
+            //Button
+            button.style.marginTop = "10px";
+            button.style.fontFamily = "Arial, Helvetica, sans-serif";
+            button.style.fontWeight = "bolder";
+            setDisplay("restart", "inline");
+            button.style.padding = "10px";
+            //Historie
+            setHeightAndWidth("historie", "40px", "100%", "relative");
+            historie.style.marginBottom = "10px";
+            historie.style.textAlign = "center";
+            historie.style.borderBottom = "5px solid #555";
+            historie.style.fontFamily = "Arial, Helvetica, sans-serif";
+            historie.style.transition = "all 2s";
+            //Container
+            setHeightAndWidth("container", "570px", "920px", "relative");
+            setBackgroundImage("container", "mainMap.png");
+            setMargin("container", "auto");
+            container.style.marginTop = "10px";
+            container.style.overflow = "hidden";
+            //Meny
+            document.getElementById("meny").style.marginTop = "10px";
+            setHeightAndWidth("meny", "50px", "100%", "absolute");
+            document.getElementById("meny").style.textAlign = "center";
+            document.getElementById("meny").style.borderTop = "5px solid #555";
+            document.getElementById("meny").style.visibility = "hidden";
+            //Hut
+            setHeightAndWidth("hut", "140px", "140px", "absolute");
+            setPosition("hut", "150px", "250px");
+            //Cave
+            setHeightAndWidth("cave", "70px", "140px", "absolute");
+            setPosition("cave", "50px", "600px");
+            cave.style.visibility = "hidden";
+            //Ship
+            setHeightAndWidth("ship", "130px", "150px", "absolute");
+            setPosition("ship", "440px", "600px");
+            //Mountains
+            setHeightAndWidth("mountains", "70px", "200px", "absolute");
+            setPosition("mountains", "420px", "120px");
+            //Main character
+            mainCharacter.style.visibility = "hidden";
+            setHeightAndWidth("mainCharacter", "100px", "60px", "absolute");
+            mainCharacter.style.transition = "all 2s";
+        }
+        //START styling functions    
+        function setDisplay(elementId, display) {
+            var detteElementet = document.getElementById(elementId);
+            detteElementet.style.display = display;
+        }
+
+        function setBackgroundImage(elementId, background) {
+            var detteElementet = document.getElementById(elementId);
+            detteElementet.style.backgroundImage = "url(bilder/" + background + ")";
+            detteElementet.style.backgroundSize = "cover";
+        }
+
+        function setHeightAndWidth(elementId, height, width, positionType) {
+            var detteElementet = document.getElementById(elementId);
+            detteElementet.style.height = height;
+            detteElementet.style.width = width;
+            detteElementet.style.position = positionType;
+        }
+
+        function setMargin(elementId, margin) {
+            var detteElementet = document.getElementById(elementId);
+            detteElementet.style.margin = margin;
+        }
+
+        function setPosition(elementId, top, left) {
+            var detteElementet = document.getElementById(elementId);
+            detteElementet.style.top = top;
+            detteElementet.style.left = left;
+        }
+        //END styling funcitons
+        //START Start game
+        function startGame() {
+            setDisplay("tittel", "none");
+            cave.style.visibility = "visible";
+            mainCharacter.style.visibility = "visible";
+            document.getElementById("meny").style.visibility = "visible";
+            historie.innerHTML = "<p id='historieText'>Hercules har gitt deg i oppdrag å samle inn 100 kjøttbiter så han kan bygge mer muskler. Klikk på forskjellige steder på kartet for å flytte deg dit!</p>";
+        }
+        //END Start game
+        //START funcitons for setting current envoirement
+        function insideEnvoirement(newPicture, place) {
+            var whereAreYou = place;
+            setDisplay("hut", "none");
+            setDisplay("cave", "none");
+            setDisplay("ship", "none");
+            setDisplay("mountains", "none");
+            setBackgroundImage("container", newPicture);
+            if (whereAreYou === "cave") {
+                setTimeout(placeIsCave, 1000);
+            }
+            if (whereAreYou == "hut") {
+                setTimeout(placeIsHut, 1000);
+            }
+            if (whereAreYou == "mountains") {
+                setTimeout(placeIsMountains, 1000);
+            }
+            if (whereAreYou == "ship") {
+                setTimeout(placeIsShip, 1000);
+            }
+        }
+
+        function outsideEnvoirement() {
+            setDisplay("hut", "inline");
+            setDisplay("cave", "inline");
+            setDisplay("ship", "inline");
+            setDisplay("mountains", "inline");
+            setBackgroundImage("container", "mainMap.png");
+        }
+        //END funcitons for setting current envoirement
+        //START funcitons for moving character
+        container.addEventListener("click", getMousePosition, false);
+
+        function getMousePosition(event) {
+            var x = event.clientX;
+            var y = event.clientY;
+            moveToMouse(x, y);
+        }
+
+        function moveToMouse(x_pos, y_pos) {
+            var left = x_pos - 220;
+            var top = y_pos - 90;
+            mainCharacter.style.left = left + "px";
+            mainCharacter.style.top = top + "px";
+            setTimeout(findCharacterPosition, 2500)
+        }
+
+        function findCharacterPosition() {
+            var isOnHut = doElsCollide(hut, mainCharacter);
+            var isOnCave = doElsCollide(cave, mainCharacter);
+            var isOnMountains = doElsCollide(mountains, mainCharacter);
+            var isOnShip = doElsCollide(ship, mainCharacter);
+            if (isOnHut === true) {
+                giveOption("hut");
+            }
+            if (isOnCave === true) {
+                giveOption("cave");
+            }
+            if (isOnMountains === true) {
+                giveOption("mountains");
+            }
+            if (isOnShip === true) {
+                giveOption("ship");
+            }
+        }
+        doElsCollide = function (el1, el2) {
+            el1.offsetBottom = el1.offsetTop + el1.offsetHeight;
+            el1.offsetRight = el1.offsetLeft + el1.offsetWidth;
+            el2.offsetBottom = el2.offsetTop + el2.offsetHeight;
+            el2.offsetRight = el2.offsetLeft + el2.offsetWidth;
+            return !((el1.offsetBottom < el2.offsetTop) || (el1.offsetTop > el2.offsetBottom) || (el1.offsetRight < el2.offsetLeft) || (el1.offsetLeft > el2.offsetRight))
+        };
+        //END funcitons for moving character
+        //START functions for giving character options. First function asks to enter a place
+        function giveOption(place) {
+            var sted = place;
+            if (sted == "hut") {
+                var answer = confirm("Vil du gå inn i hytta?");
+                if (answer == true) {
+                    alert("Ok, la oss gå!");
+                    insideEnvoirement("insideHut.jpeg", "hut");
+                }
+                else {
+                    alert("Du får komme tilbake senere da.");
+                }
+            }
+            if (sted == "cave") {
+                var answer = confirm("Vil du gå inn i hulen?");
+                if (answer == true) {
+                    alert("Ok, la oss gå!");
+                    insideEnvoirement("insideCave.png", "cave");
+                }
+                else {
+                    alert("Du får komme tilbake senere da.");
+                }
+            }
+            if (sted == "ship") {
+                var answer = confirm("Vil du gå ombord på skipet?");
+                if (answer == true) {
+                    alert("Ok, la oss gå!");
+                    insideEnvoirement("shipDeck.jpeg", "ship");
+                }
+                else {
+                    alert("Du får komme tilbake senere da.");
+                }
+            }
+            if (sted == "mountains") {
+                var answer = confirm("Vil du bestige fjellet?");
+                if (answer == true) {
+                    alert("Ok, la oss gå!");
+                    insideEnvoirement("mountainTop.jpeg", "mountains");
+                }
+                else {
+                    alert("Du får komme tilbake senere da.");
+                }
+            }
+        }
+        //CONTINIUE functions for giving character options. These functions gives options inside a certain place
+        function placeIsHut() {
+            var newOption = confirm("Det er ingen her! Tør du å stjele kjøttet i spisskammerset?")
+            if (newOption == true) {
+                setBackgroundImage("container", "meat.jpeg");
+                var takenMeat = Math.floor((Math.random() * 100) + 1);
+                historie.innerHTML = "Du fikk med deg " + takenMeat + " kjøttbiter";
+                historie.style.color = "#10631A";
+                historie.style.fontWeight = "bolder";
+                updateMat(takenMeat);
+            }
+            else {
+                alert("Ok, kom deg unna!");
+                outsideEnvoirement();
+            }
+        }
+
+        function placeIsCave() {
+            var newOption = confirm("Løvene er sultne på kjøttet ditt. Tør du gå videre?")
+            if (newOption == true) {
+                setBackgroundImage("container", "lionsDen.jpeg");
+                var takenMeat = Math.floor((Math.random() * 100) + 1);
+                historie.innerHTML = "Mannen er imponert over hvor modig du er. Du fikk " + takenMeat + " kjøttbiter.";
+                historie.style.color = "#10631A";
+                historie.style.fontWeight = "bolder";
+                updateMat(takenMeat);
+            }
+            else {
+                historie.innerHTML = "Uff, de tok litt av kjøttet ditt.";
+                historie.style.color = "#801515";
+                historie.style.fontWeight = "lighter";
+                var takenMeat = Math.floor((Math.random() * 100) + 1);
+                updateMat(-takenMeat);
+                outsideEnvoirement();
+            }
+        }
+
+        function placeIsMountains() {
+            alert("Du har brukt ganske mye energi på å gå opp hit. Du mister litt mat.");
+            var takenMeat = Math.floor((Math.random() * 100) + 1);
+            historie.innerHTML = "Du tapte " + takenMeat + " kjøttbiter på turen.";
+            historie.style.color = "#801515";
+            historie.style.fontWeight = "lighter";
+            updateMat(-takenMeat);
+            setTimeout(outsideEnvoirement, 1000);
+        }
+
+        function placeIsShip() {
+            var newOption = confirm("En seiler sier du vil få litt mat dersom du vil bli med på en liten seiltur, vil du det? Dette er din eneste sjanse før de seiler!");
+            if (newOption == true) {
+                setBackgroundImage("container", "ocean1.gif");
+                var takenMeat = Math.floor((Math.random() * 100) + 1);
+                mainCharacter.style.left = "0px";
+                mainCharacter.style.top = "0px";
+                historie.innerHTML = "Dere seilte tilbake dit du kom fra. Seileren ga deg " + takenMeat + " kjøttbiter.";
+                historie.style.color = "#10631A";
+                historie.style.fontWeight = "bolder";
+                updateMat(takenMeat);
+                
+            }
+            else {
+                alert("Ok, ingen tur på deg.");
+                outsideEnvoirement();
+            }
+            ship.style.visibility = "hidden";
+        }
+        //END functions for giving character options
+        //START funcitons for checking if the goal is reached   
+        function updateMat(antall) { //Keeps track on how much meat is collected
+            var oppdatering = antall;
+            kjott = kjott + oppdatering;
+            document.getElementById("mat").innerHTML = "Kjøttbiter: " + kjott + "/100";
+            checkIfFinished();
+        }
+
+        function checkIfFinished() {
+            if(kjott > 99){
+                setTimeout(isFinished, 2000);
+            }if(kjott < 0){
+                setTimeout(isLost, 2000);
+            }else{
+                setTimeout(outsideEnvoirement, 2000);
+            }
+        }
+
+        function isFinished() {
+            generalIsFinished();
+            var ekstraBiter = kjott - 100;
+            historie.innerHTML = "Gratulerer, oppdraget er fullført! Du samlet 100 biter pluss " + ekstraBiter + " biter ekstra. Nå har Hercules muskler til å gjennomføre sine 12 arbeider.";
+            tittel.innerHTML = "Suksess!";
+        }
+        
+        function isLost() {
+            generalIsFinished();
+            tittel.innerHTML = "Mislykket...";
+            historie.innerHTML = "Oppdraget har kostet deg for mye energi til at du kan fortsette. Hercules får ikke gjennomført sine 12 arbeider på grunn av deg.";
+        }
+        
+        function generalIsFinished(){
+            setDisplay("tittel", "block");
+            hut.style.visibility = "hidden";
+            cave.style.visibility = "hidden";
+            ship.style.visibility = "hidden";
+            mountains.style.visibility = "hidden";
+            setDisplay("mainCharacter", "none");
+            document.getElementById("mat").innerHTML = "Kjøttbiter: " + kjott + "/100";
+            document.getElementById("mat").style.color = "#801515";
+            button.style.backgroundColor = "#801515";
+            button.style.color = "#FFF";
+        }
+        //END funcitons for checking if the goal is reached
+    </script>
+</body>
+
+</html>

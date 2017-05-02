@@ -1,0 +1,265 @@
+/* START MEYER´S RESET 
+   http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* END MEYER´S RESET */
+
+/*- START Alt generelt -*/
+
+.menu-btn{
+    background-color: #BF6849;
+    border: none;
+    color: #FFF;
+    padding: 20px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+
+/*- SLUTT Alt generelt -*/
+
+
+/*- START Webshop generelt -*/
+
+#container {
+    width: 768px;
+    height:auto; 
+    overflow:auto;
+    background-color: #E1CD4B;
+    margin: auto;
+}
+
+h1{
+    display: inline;
+    padding: 7%;
+}
+
+/*- SLUTT Webshop generelt -*/
+
+
+/*- START Webshop produktbokser generelt -*/
+ 
+#produkter{
+    width: 100%;
+    margin: auto;
+}
+
+.produkt-box {
+    width: 50%;
+    margin-bottom: 1px;
+    height: auto;
+    background-color: #FFF;
+    float: left;
+}
+
+.img-wrapper{
+    width: 100%;
+    text-align: center;
+}
+
+.img-responsive {
+    height: 230px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+/*- SLUTT Webshop produktbokser generelt -*/
+
+/*- START Webshop produktbokser spesifikt -*/
+
+.btn-wrapper{
+    width: 100%;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.buy-btn{
+    border: 1px solid #D9AA1E;
+
+    color: #111;
+    padding: 20px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width: 70%;
+}
+
+.buy-btn:active{
+  background-color: #BF6849;
+ }
+
+.info-div{
+    height: 130px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.produkt-tittel{
+    display: inline;
+    margin: 5%;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.produkt-pris{
+    display: inline;
+    margin: 5%;
+    color: #FFD849;
+    font-size: 30px;
+    
+}
+
+/*- SLUTT Webshop produktbokser spesifikt -*/
+
+/*- START Webshop spesifikt -*/
+
+#handlekurvBtn{
+    width: 25%;
+    margin-right: 7.5%;
+    margin-left: 7.5%;
+    
+    
+}
+
+#slettBtn{
+    width: 25%;
+    margin-right: 7.5%;
+    margin-left: 7.5%;
+}
+
+/*- SLUTT Webshop spesifikt -*/
+
+/*- START Handlevogn generelt -*/
+
+#containerHandlevogn {
+    position: relative;
+    width: 768px;
+    height:650px; 
+    overflow: auto;
+    margin: auto;
+}
+
+#tilbakeBtn{
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+}
+
+/*- SLUTT Handlevogn generelt -*/
+
+/*- START Handlevogn spesifikt -*/
+
+.handlevogn-elementer{
+    width: 100%;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    height: 90px;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    background-color: #FFF;
+    border-top: 1px solid #D9AA1E;
+    color: #555;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.handlevogn-liste{
+    font-family: sans-serif;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#handlekurv{
+    color: #555;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+#totalt{
+    position: absolute;
+    bottom: 0;
+    background-color: #A63B32;
+    color: #FFF;
+    font-size: 20px;
+}
+
+.img-handlekurv{
+    height: 50px;
+    right: 0;
+}
+
+p-handlekurv{
+    display: inline;
+    float: left;
+}
+/*- SLUTT Handlevogn spesifikt -*/
+
+/*- START Animasjon -*/
+@-webkit-keyframes flash {
+    0% {
+        background-color: #BF6849;
+    }
+    50% {
+        background-color: #FFF;
+    }
+
+    100% {
+        background-color: #BF6849;
+    }
+}
+/*- SLUTT Animasjon -*/
+
+ 

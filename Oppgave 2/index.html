@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="js/jsCommon.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Webshop</title>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <input id="handlekurvBtn" type="button" class="menu-btn" onclick="location.href = 'index2.html';lagCookie()" value="Til handlekurven (0)" />
+            <h1>WS</h1>
+            <input type="button" id="slettBtn" class="menu-btn" onclick="slettCookie()" value="Ingen varer å slette" /> </header>
+        <main>
+            <div id="produkter"> </div>
+        </main>
+    </div>
+    <script>
+        var buyBtn = ["fotballBtn", "basketballBtn", "tennisballBtn", "volleyballBtn"];
+        var produkter;
+        var handlekurvBtn;
+        var slettBtn;
+        var init = function () { //start init 
+            var createHTMLObjects = function () {
+                produkter = document.getElementById("produkter");
+                handlekurvBtn = document.getElementById("handlekurvBtn");
+                slettBtn = document.getElementById("slettBtn");
+            }();
+            var createProducts = function () {
+                for (var i = 0; i < 4; i++) {
+                    var product = document.createElement("div");
+                    product.className = "produkt-box";
+                    product.innerHTML = "<div class='img-wrapper'> <img class='img-responsive' src=\"" + bilde[i] + "\"/></div> <div class='info-div'> <h4 class='produkt-tittel' >" + tittel[i] + "</h4> <br> <h4 class='produkt-pris' >" + pris[i] + "</h4> <div class='btn-wrapper'><input id=\"" + buyBtn[i] + "\" type='button' onClick='iHandlevogn(this.id)' value='Legg i handlevogn' class='buy-btn'/></div> </div>";
+                    produkter.appendChild(product);
+                }
+            }();
+        }(); // end init
+        function iHandlevogn(obj) { //Oppdaterer array og antVarer
+            var id = obj;
+            if (id == "fotballBtn") {
+                produktArray[0]++;
+                fotballBtn.value = "Enda en i handlevogn";   
+            }
+            else if (id == "basketballBtn") {
+                produktArray[1]++;
+                basketballBtn.value = "Enda en i handlevogn";
+            }
+            else if (id == "tennisballBtn") {
+                produktArray[2]++;
+                tennisballBtn.value = "Enda en i handlevogn";
+            }
+            else if (id == "volleyballBtn") {
+                produktArray[3]++;
+                volleyballBtn.value = "Enda en i handlevogn";
+            }
+            antVarer++;
+            opptaderVarer();
+            kanSlette();
+        }
+
+        function opptaderVarer() {
+            handlekurvBtn.value = "Til handlekurven (" + antVarer + ")";
+            handlekurvBtn.style.webkitAnimationName = "flash"; 
+            handlekurvBtn.style.webkitAnimationDuration = "1s";
+            handlekurvBtn.style.webkitAnimationTimingFunction = "ease-in-out";
+            setTimeout(function() {
+                handlekurvBtn.style.webkitAnimationName = "";
+            }, 1000);
+        }
+
+        function kanSlette() {
+            if (antVarer !== 0) {
+                slettBtn.value = "Tøm handlekurven";
+                slettBtn.style.backgroundColor = "#A63B32";
+            }
+        }
+    </script>
+</body>
+
+</html>
